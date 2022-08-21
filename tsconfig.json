@@ -1,0 +1,13 @@
+{
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "./tests/", "./dist/"],
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "lib": [ "es2015", "dom" ],
+    "experimentalDecorators": true,
+  }
+}

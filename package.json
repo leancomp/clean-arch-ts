@@ -1,0 +1,30 @@
+{
+  "name": "clean-arch-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/cmd/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node .",
+    "start:local": "LOCAL_ENVIRONMENT=1 node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leancomp/clean-arch-ts.git"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.5.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.4.0",
+    "typescript": "^4.3.2"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leancomp/clean-arch-ts/issues"
+  },
+  "homepage": "https://github.com/leancomp/clean-arch-ts#readme"
+}
