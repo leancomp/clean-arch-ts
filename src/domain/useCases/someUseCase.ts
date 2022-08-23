@@ -1,10 +1,10 @@
 import { inject, injectable } from 'tsyringe'
 
-import { IEntitiesProvider } from '../repositories/iEntitiesProvider'
+import { IBazProvider } from '../repositories/iBazProvider'
 
 @injectable()
 export class SomeUseCase {
-    constructor (@inject('IEntitiesProvider') private entitiesProvider: IEntitiesProvider) {
+    constructor (@inject('IBazProvider') private entitiesProvider: IBazProvider) {
     }
 
     async doSomething (num: number): Promise<unknown> {

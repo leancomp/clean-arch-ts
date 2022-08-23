@@ -1,18 +1,18 @@
 import { injectable } from 'tsyringe'
-import { IEntitiesProvider } from '../../domain/repositories/iEntitiesProvider'
+import { IBazProvider } from '../../domain/repositories/iBazProvider'
 import { Foo } from '../../domain/entities/foo'
 import { Bar } from '../../domain/entities/bar'
 
 @injectable()
-export class LocalEntitiesProvider implements IEntitiesProvider {
+export class SomeBazProvider implements IBazProvider {
     addOne(num: number): Promise<Foo> {
-        console.log('Running addOne() on entities provider locally')
+        console.log('[SomeBazProvider] Running addOne() on baz provider locally')
 
         return Promise.resolve(String(num + 1) as Foo)
     }
 
     doMagic(word: string): Promise<Bar[]> {
-        console.log('Running doMagic() on entities provider locally')
+        console.log('[SomeBazProvider] Running doMagic() on baz provider locally')
         const rand = Math.floor(Math.random() * 10)
         const magicChars = word
             .split('')

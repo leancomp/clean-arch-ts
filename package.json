@@ -2,12 +2,11 @@
   "name": "clean-arch-ts",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/cmd/index.js",
+  "main": "dist/delivery/cmd/index.js",
   "scripts": {
     "build": "tsc",
     "start": "node .",
-    "start:local": "LOCAL_ENVIRONMENT=1 node .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:local": "LOCAL_ENVIRONMENT=1 node ."
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,13 @@
+name: Release notification
+on:
+  pull_request:
+    branches:
+      - cor-beta
+      - master
+    types:
+      - closed
+
+jobs:
+  notify:
+    uses: ProjectCORTeam/shared-workflows/.github/workflows/release-notification.yml@v1.0.0
+    secrets: inherit

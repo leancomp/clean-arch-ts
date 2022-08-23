@@ -1,21 +1,21 @@
 import { inject, injectable} from 'tsyringe'
-import { IEntitiesProvider } from '../../domain/repositories/iEntitiesProvider'
+import { IBazProvider } from '../../domain/repositories/iBazProvider'
 import { Foo } from '../../domain/entities/foo'
 import { Bar } from '../../domain/entities/bar'
-import {FakeClient} from "../clients/fakeClient";
+import { FakeClient } from '../clients/fakeClient'
 
 @injectable()
-export class ExternalEntitiesProvider implements IEntitiesProvider {
+export class AnotherBazProvider implements IBazProvider {
     constructor(@inject('FakeClient') private client: FakeClient) {
     }
 
     addOne(num: number): Promise<Foo> {
-        console.log('Running addOne() on entities provider externally')
+        console.log('[AnotherBazProvider] Running addOne() on baz provider externally')
         return this.client.mimic(String(num + 1) as Foo)
     }
 
     doMagic(word: string): Promise<Bar[]> {
-        console.log('Running doMagic() on entities provider externally')
+        console.log('[AnotherBazProvider] Running doMagic() on baz provider externally')
         const rand = Math.floor(Math.random() * 10)
         const magicChars = word
             .split('')
