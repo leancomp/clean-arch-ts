@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
-import { SomeUseCase } from '../useCases/someUseCase'
-import { SomeOtherUseCase } from '../useCases/someOtherUseCase'
+import { SomeUseCase } from '../../domain/useCases/someUseCase'
+import { SomeOtherUseCase } from '../../domain/useCases/someOtherUseCase'
 
 @injectable()
 export class ExampleController {

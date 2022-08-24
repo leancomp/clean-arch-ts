@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import { container } from 'tsyringe'
 
-import { ExampleController } from '../domain/controllers/exampleController'
+import { ExampleController } from './controllers/exampleController'
 import { SomeUseCase } from '../domain/useCases/someUseCase'
 import { SomeOtherUseCase } from '../domain/useCases/someOtherUseCase'
 

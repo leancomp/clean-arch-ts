@@ -1,5 +1,5 @@
 import { diContainer } from '../../infrastructure/register'
-import { ExampleController } from '../../domain/controllers/exampleController'
+import { ExampleController } from '../../infrastructure/controllers/exampleController'
 
 async function run(): Promise<void> {
     const controller: ExampleController = diContainer.resolve('ExampleController')
