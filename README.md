@@ -19,6 +19,7 @@ Lightweight clean architecture template.
 - :whale: Multi stage lightweight Dockerfile 
 - :octocat: GitHub workflows
 - 🔧 Makefile
+- 📋 Pull-Request template
 
 ## Structure
 Directories structure proposal:
@@ -51,12 +52,25 @@ TODO
 ## Installation
 
 ```bash
-> npm i
+❯ make install
+❯ make build
 ```
 
+## The Makefile
+
 ```bash
-> npm run build
+❯ make
+Usage: make <target>
+
+Targets:
+help:                   ## Show the help.
+build:                  ## Build the project.
+start:                  ## Run start script.
+docker-build:           ## Build docker image.
+clean:                  ## Remove node_modules.
+install:                ## Install packages.
 ```
+
 
 ## DI usage
 
@@ -85,7 +99,7 @@ container.registerSingleton('SomeOtherUseCase', SomeOtherUseCase)
 
 Let's simulate that we need to run the code with the local implementation of some provider.
 
-Running `> npm run start:local` will output something like:
+Running `❯ npm run start:local` will output something like:
 
 ```bash
 > clean-arch-ts@1.0.0 start:local
@@ -99,7 +113,7 @@ doSomethingElse('hello') [ 'o', 'l', 's', 's', 'v' ]
 
 Otherwise, the DI registry will set the external provider implementation.
 
-Running `> npm run start` will output something like:
+Running `❯ npm run start` will output something like:
 
 ```bash
 > clean-arch-ts@1.0.0 start

@@ -10,23 +10,23 @@ help:			## Show the help.
 	@fgrep "##" Makefile | fgrep -v fgrep
 
 .PHONY: build
-build:			## Build the project
+build:			## Build the project.
 	$(TSC)
 
 .PHONY: start
-start:			## Run start script
+start:			## Run start script.
 	$(TSC)
 	npm run start
 
 .PHONY: docker-build
-docker-build:		## Build docker image
+docker-build:		## Build docker image.
 	docker build . -f docker/Dockerfile -t clean-arch-ts:latest
 
 .PHONY: clean
-clean:			## Remove node_modules
+clean:			## Remove node_modules.
 	rm -rf node_modules
 
 .PHONY: install
-install:		## Install packages
+install:		## Install packages.
 	make clean
 	npm i
