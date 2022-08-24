@@ -7,7 +7,9 @@
   <a href="#about-this-template">About this template</a> •
   <a href="#structure">Structure</a> •
   <a href="#how-it-works">How It Works</a> •
-  <a href="#installation">Installation</a><br>
+  <a href="#installation">Installation</a> •
+  <a href="#di-usage">DI usage</a> •
+  <a href="#multi-stage-dockerfile">Dockerfile</a><br>
 </p>
 
 ## About this template
