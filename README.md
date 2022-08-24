@@ -1,6 +1,7 @@
 # clean-arch-ts
+
 <p align="center">
-  <img src="docs/cookiecutter-logo.png" alt="Template"><br>
+  <img src="docs/no-logo.png" alt="Template"><br>
 </p>
 <p align="center">
   <a href="#about-this-template">About this template</a> •
@@ -47,7 +48,7 @@ Directory structure proposal:
 ```
 
 ## How it works
-TODO
+![img.png](clean-arch-flow.png)
 
 ## Installation
 
