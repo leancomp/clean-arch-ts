@@ -22,7 +22,7 @@ Lightweight clean architecture template.
 - 📋 Pull-Request template
 
 ## Structure
-Directories structure proposal:
+Directory structure proposal:
 
 ```text
 📦src
