@@ -23,6 +23,7 @@ Lightweight clean architecture template.
 - :octocat: GitHub workflows
 - 🔧 Makefile
 - 📋 Pull-Request template
+- 🧪 Testing structure using [sinon](https://sinonjs.org/), [mocha](https://mochajs.org/) and [chai](https://www.chaijs.com/)
 
 ## Structure
 Directory structure proposal:
