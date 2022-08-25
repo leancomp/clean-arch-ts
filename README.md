@@ -84,34 +84,48 @@ install:                ## Install packages.
 In the infrastructure layer you can find the DI container register where dependency injection rules are defined using
 [tsyringe package](https://github.com/microsoft/tsyringe) for constructor injection.
 
+### Multiple dependencies
 ```ts
-const client = new FakeClient()
-client.connect()
-container.registerInstance('FakeClient', client)
+container.registerSingleton('HttpClient', FakeHttpClient)
+container.registerSingleton('ModelProvider', HttpModelProvider)
 
 if (isLocal) {
-    container.registerSingleton('IBazProvider', SomeBazProvider)
+    container.registerSingleton('SuggestionsProvider', InMemorySuggestionsProvider)
 } else {
-    container.registerSingleton('IBazProvider', AnotherBazProvider)
+    container.registerSingleton('DynamoDbClient', FakeDynamoDbClient)
+    container.registerSingleton('SuggestionsProvider', DynamoSuggestionsProvider)
 }
 
-container.registerSingleton('ExampleController', ExampleController)
-container.registerSingleton('SomeUseCase', SomeUseCase)
-container.registerSingleton('SomeOtherUseCase', SomeOtherUseCase)
+
+container.register('SuggestionController', SuggestionController)
+
+container.register('MakeSuggestion', MakeSuggestion)
+container.register('GetSuggestions', GetSuggestions)
 ```
 
-Let's simulate that we need to run the code with the local implementation of some provider.
+Let's simulate that we want to run the code with the local implementation of SuggestionsProvider.
+
+The `start:local` script in package.json set the environment to `local`, so the register with inject local InMemory implementation instead of DynamoDb one.
 
 Running `❯ npm run start:local` will output something like:
 
 ```bash
 > clean-arch-ts@1.0.0 start:local
-> LOCAL_ENVIRONMENT=1 node .
+> ENVIRONMENT=local node .
 
-[SomeBazProvider] Running addOne() on baz provider locally
-doSomething(3) 4
-[SomeBazProvider] Running doMagic() on baz provider locally
-doSomethingElse('hello') [ 'o', 'l', 's', 's', 'v' ]
+[InMemorySuggestionsProvider] addOne() Suggestion { userId: 3, date: 2022-08-25T18:31:19.203Z, value: 27 }
+[InMemorySuggestionsProvider] addOne() Suggestion { userId: 3, date: 2022-08-25T18:31:19.203Z, value: 12 }
+[InMemorySuggestionsProvider] addOne() Suggestion { userId: 3, date: 2022-08-25T18:31:19.203Z, value: 9 }
+[InMemorySuggestionsProvider] getFor() {
+  userId: 3,
+  start: 2022-08-24T00:00:00.000Z,
+  end: 2022-08-26T00:00:00.000Z
+}
+getSuggestions() for  3 [
+  Suggestion { userId: 3, date: 2022-08-25T18:31:19.203Z, value: 27 },
+  Suggestion { userId: 3, date: 2022-08-25T18:31:19.203Z, value: 12 },
+  Suggestion { userId: 3, date: 2022-08-25T18:31:19.203Z, value: 9 }
+]
 ```
 
 Otherwise, the DI registry will set the external provider implementation.
@@ -122,10 +136,15 @@ Running `❯ npm run start` will output something like:
 > clean-arch-ts@1.0.0 start
 > node .
 
-[AnotherBazProvider] Running addOne() on baz provider externally
-doSomething(3) 4
-[AnotherBazProvider] Running doMagic() on baz provider externally
-doSomethingElse('hello') [ 'm', 'j', 'q', 'q', 't' ]
+[DynamoSuggestionsProvider] addOne() Suggestion { userId: 3, date: 2022-08-25T18:31:55.075Z, value: 24 }
+[DynamoSuggestionsProvider] addOne() Suggestion { userId: 3, date: 2022-08-25T18:31:55.075Z, value: 18 }
+[DynamoSuggestionsProvider] addOne() Suggestion { userId: 3, date: 2022-08-25T18:31:55.075Z, value: 9 }
+[DynamoSuggestionsProvider] getFor() {
+  userId: 3,
+  start: 2022-08-24T00:00:00.000Z,
+  end: 2022-08-26T00:00:00.000Z
+}
+getSuggestions() for  3 []
 ```
 
 ## Multi-stage Dockerfile

@@ -1,29 +1,42 @@
 import 'reflect-metadata'
 import { container } from 'tsyringe'
 
-import { ExampleController } from './controllers/exampleController'
-import { SomeUseCase } from '../domain/useCases/someUseCase'
-import { SomeOtherUseCase } from '../domain/useCases/someOtherUseCase'
+import { Config } from '../delivery/config'
+import { DynamoConfig, ModelProviderConfig } from './config'
 
-import { SomeBazProvider } from './repositories/someBazProvider'
-import { AnotherBazProvider } from './repositories/anotherBazProvider'
+import { FakeHttpClient } from './clients/fakeHttpClient'
+import { FakeDynamoDbClient } from './clients/fakeDynamoDbClient'
 
-import { FakeClient } from './clients/fakeClient'
+import { DynamoSuggestionsProvider } from './repositories/dynamoSuggestionsProvider'
+import { InMemorySuggestionsProvider } from './repositories/inMemorySuggestionsProvider'
+import { HttpModelProvider } from './repositories/httpModelProvider'
 
-const isLocal = !!process.env.LOCAL_ENVIRONMENT
+import { SuggestionController } from './controllers/suggestionController'
 
-const client = new FakeClient()
-client.connect()
-container.registerInstance('FakeClient', client)
+import { MakeSuggestion } from '../domain/useCases/makeSuggestion'
+import { GetSuggestions } from '../domain/useCases/getSuggestions'
+
+const { dynamodb, modelProvider, environment } = Config
+const isLocal = environment === 'local'
+
+container.registerInstance('DynamoConfig', new DynamoConfig(dynamodb))
+container.registerInstance('ModelProviderConfig', new ModelProviderConfig(modelProvider))
+
+container.registerSingleton('HttpClient', FakeHttpClient)
 
 if (isLocal) {
-    container.registerSingleton('IBazProvider', SomeBazProvider)
+    container.registerSingleton('SuggestionsProvider', InMemorySuggestionsProvider)
 } else {
-    container.registerSingleton('IBazProvider', AnotherBazProvider)
+    container.registerSingleton('DynamoDbClient', FakeDynamoDbClient)
+    container.registerSingleton('SuggestionsProvider', DynamoSuggestionsProvider)
 }
 
-container.register('ExampleController', ExampleController)
-container.register('SomeUseCase', SomeUseCase)
-container.register('SomeOtherUseCase', SomeOtherUseCase)
+container.registerSingleton('ModelProvider', HttpModelProvider)
+
+container.register('SuggestionController', SuggestionController)
+
+container.register('MakeSuggestion', MakeSuggestion)
+container.register('GetSuggestions', GetSuggestions)
+
 
 export const diContainer = container

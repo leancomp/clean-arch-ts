@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node .",
-    "start:local": "LOCAL_ENVIRONMENT=1 node ."
+    "start:local": "ENVIRONMENT=local node ."
   },
   "repository": {
     "type": "git",
