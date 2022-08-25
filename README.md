@@ -86,6 +86,8 @@ In the infrastructure layer you can find the DI container register where depende
 
 ### Multiple dependencies
 ```ts
+// infrastructure/register.ts 
+// ...
 container.registerSingleton('HttpClient', FakeHttpClient)
 container.registerSingleton('ModelProvider', HttpModelProvider)
 
@@ -101,6 +103,19 @@ container.register('SuggestionController', SuggestionController)
 
 container.register('MakeSuggestion', MakeSuggestion)
 container.register('GetSuggestions', GetSuggestions)
+// ...
+```
+
+```ts
+// domain/useCases/makeSuggestion.ts
+// ...
+@injectable()
+export class MakeSuggestion {
+    constructor (
+        @inject('ModelProvider') private modelProvider: ModelProvider,
+        @inject('SuggestionsProvider') private suggestionsProvider: SuggestionsProvider) {
+    }
+// ...
 ```
 
 Let's simulate that we want to run the code with the local implementation of SuggestionsProvider.
