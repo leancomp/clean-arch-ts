@@ -11,7 +11,7 @@ export class MakeSuggestion {
         @inject('SuggestionsProvider') private suggestionsProvider: SuggestionsProvider) {
     }
 
-    async do (userId: number, date: Date): Promise<unknown> {
+    async do (userId: number, date: Date): Promise<Suggestion> {
         const something = await this.modelProvider.getSomething(userId)
         const suggestion = new Suggestion(userId, date)
         suggestion.calculateValue(something)
