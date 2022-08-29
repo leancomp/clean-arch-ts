@@ -17,6 +17,9 @@ original_name="clean-arch-ts"
 # for filename in $(find . -name "*.*") 
 for filename in $(git ls-files) 
 do
+    if [[ $filename =~ "workflows" ]]; then
+       continue
+    fi
     sed -i "s/$original_author/$author/g" $filename
     sed -i "s/$original_name/$name/g" $filename
     echo "Renamed $filename"
