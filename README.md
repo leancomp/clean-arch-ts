@@ -51,7 +51,7 @@ Directory structure proposal:
 ```
 
 ## How it works
-![img.png](clean-arch-flow.png)
+![img.png](docs/clean-arch-flow.png)
 
 ## Installation
 
