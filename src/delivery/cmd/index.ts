@@ -17,8 +17,8 @@ async function run(): Promise<void> {
     await controller.makeSuggestion(userId, now)
     await controller.makeSuggestion(userId, now)
 
-    const somethingElse = await controller.getSuggestions(userId, yesterday, tomorrow)
-    console.log('getSuggestions() for ', userId, somethingElse)
+    const suggestions = await controller.getSuggestions(userId, yesterday, tomorrow)
+    console.log('getSuggestions() for ', userId, suggestions)
 }
 
 (async () => {
